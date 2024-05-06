@@ -1,3 +1,5 @@
+import Exceptions.ErrorMonedaSeleccionadaException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,23 +17,7 @@ public class InteraccionconUsuario {
                 "4. Peso Colombiano [COP]\n" +
                 "5. Dolar Estadounidense [USD]");
         String monedainicial = teclado.next();
-        switch (monedainicial) {
-            case "1":
-                listamonedas.add("ARS");
-                break;
-            case "2":
-                listamonedas.add("BRL");
-                break;
-            case "3":
-                listamonedas.add("CLP");
-                break;
-            case "4":
-                listamonedas.add("COP");
-                break;
-            case "5":
-                listamonedas.add("USD");
-                break;
-        }
+        listamonedas.add(moneda(monedainicial));
 
         System.out.println("****************************\n");
         System.out.println("A que moneda quieres convertir:\n" +
@@ -43,24 +29,24 @@ public class InteraccionconUsuario {
 
         String monedaFinal = teclado.next();
 
-        switch (monedaFinal) {
-            case "1":
-                listamonedas.add("ARS");
-                break;
-            case "2":
-                listamonedas.add("BRL");
-                break;
-            case "3":
-                listamonedas.add("CLP");
-                break;
-            case "4":
-                listamonedas.add("COP");
-                break;
-            case "5":
-                listamonedas.add("USD");
-                break;
-        }
+        listamonedas.add(moneda(monedaFinal));
 
         return listamonedas;
+    }
+
+    private String moneda(String inputMoneda){
+        switch (inputMoneda) {
+            case "1":
+                return("ARS");
+            case "2":
+                return("BRL");
+            case "3":
+                return("CLP");
+            case "4":
+                return("COP");
+            case "5":
+                return("USD");
+        }
+        throw new ErrorMonedaSeleccionadaException("no existe la moneda seleccionada en el menu.");
     }
 }
